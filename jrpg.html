@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pokemon JRPG</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="stylegame.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    </head>
+    <body id = "body">
+    <div class="principal-fight">
+        <div class="combat">
+            <div class="enemy__div principal__div ">
+                <div class="player-pokemon">
+                    <img class="enemy-poke__img img appear" id="player-img" src="#">
+                </div>
+                <div>
+                    <div class="enemy-bar__div pokemon-information">
+                        <h4 class="enemy-pokemon-name" id="enemy-name">Pokemon</h4>
+                        <div>
+                            <div class="health-bar-div">
+                                <div class="enemy-health-bar health-bar"> </div>
+                            </div>
+                        </div>
+                        <p class="enemy-health-num health-num">100/100</p>
+                        <h5 id="enemy-types" style="margin: 0px;">Fire fire</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="player__div principal__div">
+                <div class="player-pokemon">
+                    <img class="player-poke__img img appear" id="player-img" src="#">
+                </div>
+                <div>
+                    <div class="player-bar__div pokemon-information">
+                        <h4 class="player-pokemon-name" id="player-name">Pokemon</h4>
+                        <div>
+                            <div class="health-bar-div">
+                                <div class="player-health-bar health-bar"> </div>
+                            </div>
+                        </div>
+                        <p class="health-num-player">100/100</p>
+                        <div>
+                            <h5 id="player-types" style="margin: 0px;">Fire fire</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="information-side_bar">
+          <h4>Information</h4>
+          <div class="information-side_bar__div-player information-side_bar__div">
+          </div>
+          <div class="information-side_bar__div-enemy information-side_bar__div">
+          </div>  
+        </div>
+    </div>
+
+        
+        <form class="menu__form">
+            <div class="selecction__div">
+                <button class="fight option_btn-1 option_btn" id="fight-btn">
+                    <h3>Attack</h3>
+                </button>
+                <button class="bag option_btn-2 option_btn" id="bag-btn">
+                    <h3>Bag</h3>
+                </button>
+                <button class="pokemon option_btn-3 option_btn" id="pokemon-btn">
+                    <h3>Pokemon</h3>
+                </button>
+                <button class="run option_btn-4 option_btn" id="run-btn">
+                    <h3>Run</h3>
+                </button>
+
+            </div>
+
+            <div class="menuPokemon menuPokemonFight menuPokemonDiv__div-1 dis">
+                <div class="fightPokemon__div menuPokemon__div-1  dis" id="menu-fight">
+                 </div>
+                 <div class="btn-back-div">
+                    <button class="btn-back" data-menu="menu-fight"><</button>
+                </div>
+            </div>
+            <div class="menuPokemon menuPokemonBag menuPokemonDiv__div-2 dis">
+                <div class="bagPokemon__div menuPokemon__div-2 dis" id="menu-bag">
+                </div>
+                <div class="btn-back-div">
+                    <button class="btn-back" data-menu="menu-bag" ><</button>
+                </div>
+            </div>
+
+            <div class="menuPokemon menuPokemonPoke menuPokemonDiv__div-3 dis">
+                <div class="choosePokemon__div menuPokemon__div-3 dis" id="menu-pokemon">
+                </div>
+                <div class="btn-back-div">
+                    <button class="btn-back" data-menu="menu-poke" ><</button>
+                </div>
+            </div>
+
+            <div class="menuPokemon menuPokemonRun menuPokemonDiv__div-4 dis">
+                <div class="runPokemon__div menuPokemon__div-4 dis" id="menu-run">
+                </div>
+                <div class="btn-back-div">
+                    <button class="btn-back" data-menu="menu-run" ><</button>
+                </div>
+            </div>
+
+        </form>
+        <div class="win dis">
+            <h4>You Win!</h4>
+        </div>
+        <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+        <script type="module" src="code/jrpg.js"></script>
+    </body>
+</html>

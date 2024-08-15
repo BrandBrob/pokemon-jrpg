@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pokedex JS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <nav class="nav">
+            <h1 class="nav-h1">Select your Pokemons</h1>
+        </nav>
+        <div class="div-main">
+            <div id="pokemon-selection">
+            <div class="div">
+                <div class="pokemon-data">
+                    <h2 class="name dis"></h2>
+                    <h3 class="id dis"></h3>
+                    <h3 class="type dis"></h3>
+                </div>
+                <div class="pokemon-div">
+                </div>
+                <div class="pokemon-stats" id="stats">
+                </div>
+                <div class="inputs-container">
+                    <div class="div-inputs">
+                        <input list ="inp-text1" id="inp-text" placeholder="Choose your pokemon!" value="pikachu">
+                            <datalist id="inp-text1">
+
+                            </datalist>
+                            <div class="div-btns">
+                                <input class="div-inputs__btn" id="inp-btn" type="button" value="Search">
+                                <input class="div-inputs__btn" id="inp-confirm" type="button" value="Confirm">
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="div-moves dis">
+        <div id="pokemon-moves">
+        <div class="pokemon-moves-container div">
+            <h3>Pokemon Moves</h3>
+            <h4>Select a pokemon</h4>
+            <h5 id="pokemon-selected-for-moves"></h5>
+            <div class="moves-container">
+                <div class="move-container">
+                    <div class="input-container">
+                        <input list="move-list-1" type="text" id="input-move-searcher-1" placeholder="Search a move">
+                        <datalist id="move-list-1">
+                            
+                        </datalist>
+                    </div>
+                    <div class="move-div div" id="move-div-1" >
+                        <div class="move-div_container">
+                            <div class="move-div-stats tiny-move">
+                                <p id="move-name-1"></p>
+                                <p id="move-type-1"></p>
+                                <p id="move-power-1"></p>
+                                <p id="move-accuracy-1"></p>
+                                <p id="move-pp-1"></p>
+                            </div>
+                            <div class="move-div-entries tiny-move">
+                                <p id ="move-effect-1"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="move-container">
+                    <div class="input-container">
+                        <input list="move-list-2" type="text" id="input-move-searcher-2" placeholder="Search a move">
+                        <datalist id="move-list-2">
+                            
+                        </datalist>
+                    </div>
+                    <div class="move-div div" id="move-div-2" >
+                        <div class="move-div_container">
+                            <div class="move-div-stats tiny-move">
+                                <p id="move-name-2"></p>
+                                <p id="move-type-2"></p>
+                                <p id="move-power-2"></p>
+                                <p id="move-accuracy-2"></p>
+                                <p id="move-pp-2"></p>
+                            </div>
+                            <div class="move-div-entries tiny-move">
+                                <p id ="move-effect-2"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="move-container">
+                    <div class="input-container">
+                        <input list="move-list-3" type="text" id="input-move-searcher-3" placeholder="Search a move">
+                        <datalist id="move-list-3">
+                            
+                        </datalist>
+                    </div>
+                    <div class="move-div div" id="move-div-3" >
+                        <div class="move-div_container">
+                            <div class="move-div-stats tiny-move">
+                                <p id="move-name-3"></p>
+                                <p id="move-type-3"></p>
+                                <p id="move-power-3"></p>
+                                <p id="move-accuracy-3"></p>
+                                <p id="move-pp-3"></p>
+                            </div>
+                            <div class="move-div-entries tiny-move">
+                                <p id ="move-effect-3"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="move-container">
+                    <div class="input-container">
+                        <input list="move-list-4" type="text" id="input-move-searcher-4" placeholder="Search a move">
+                        <datalist id="move-list-4">
+                            
+                        </datalist>
+                    </div>
+                    <div class="move-div div" id="move-div-4" >
+                        <div class="move-div_container">
+                            <div class="move-div-stats tiny-move">
+                                <p id="move-name-4"></p>
+                                <p id="move-type-4"></p>
+                                <p id="move-power-4"></p>
+                                <p id="move-accuracy-4"></p>
+                                <p id="move-pp-4"></p>
+                            </div>
+                            <div class="move-div-entries tiny-move">
+                                <p id ="move-effect-4"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="btn-confirmMoves" class="dis" >Confirm Pokemon Moves</button>
+        </div>
+    </div>
+</div>
+        <div class="div-mid">
+            <div class="choosen-pokemon-div div">
+                <button id="erase-btn">Erase Pokemon</button>
+                <button class="dis" id="confirm-all-btn">Confirm all pokemons</button>
+                <button class="pokemon-div__confirmChanges__btn dis" id="confirm-changes">Use this team</button>
+            </div>
+        </div>
+        <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+        <script type="module" src="code/main.js"></script>
+        
+    </body>
+</html>

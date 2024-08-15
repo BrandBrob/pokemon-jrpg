@@ -1,0 +1,301 @@
+body{
+    color: #eee;
+    background-color: #888;
+    font-family: 'Pixelify Sans', sans-serif;
+    margin: 0px;
+}
+
+
+.player__div{
+    display: flex;
+    align-items:flex-end;
+    justify-content: space-evenly;
+    margin-top: 100px;
+    margin-right: 300px;
+}
+.enemy__div{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items:flex-end;
+    justify-content: space-evenly;
+    margin-left: 300px;
+}
+
+.img{
+    width: 170px;
+    height: auto;
+}
+
+
+.pokemon-information{
+    outline: 5px double #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: 114px 0px 200px 0px;
+    width: 300px;
+    background-color: #333;
+}
+.health-bar-div{
+    
+    width: 250px;
+    background-color: #222;
+}
+.health-bar{
+    margin-top: 10px;
+    width: 100%;
+    height: 10px;
+    background-color: #009010;
+    transition: background,width 0.3s;
+}
+
+.selecction__div{
+    display: grid;
+    grid-template-rows: 130px 130px ;
+    grid-template-columns: 3fr 3fr;
+    justify-content: center;
+    background-color: #333;
+    margin: 10px 0px 0px 0px;
+    padding: 20px;
+    height: 50dvh;
+    border-radius: 24px;
+    margin: 20px;
+}
+
+.option_btn{
+    cursor: pointer;
+    border-radius: 14px;
+    margin: 20px;
+    background-color: #555;
+    border: none;
+    outline: 2px solid #ddd;
+    height: 100px;
+}
+
+.selecction__div__div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div__back-btn{
+    width: 200px;
+    padding: 10px;
+}
+
+.menuPokemon{
+    border-radius: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #333;
+    margin: 20px;
+    padding: 20px;
+    height: 50dvh;
+
+}
+.fightPokemon__div{
+    border-radius: 14px;
+    outline: 2px solid #ddd;
+    background-color: #222;
+    display: grid;
+    grid-template-rows: 130px 130px ;
+    grid-template-columns: 3fr 3fr;
+    margin: 10px 0px 0px 0px;
+    padding: 20px;
+    justify-content: center;
+}
+.attack-miniInfo-div{
+    border-radius: 7px;
+    display: flex;
+    justify-content: center;
+    outline: 1px solid #000;
+    transition: 0.2s font-size;
+}
+.attack-miniInfo-div:hover{
+    font-size: 19px;
+}
+.btn-back-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.btn-back{
+    cursor: pointer;
+    height: 20px;
+    font-size: 18px;
+    width: 150px;
+    margin: 20px;
+    border: none;
+    outline: 2px solid #ddd;
+    background-color: #666;
+}
+.choosePokemon__div{
+    border-radius: 14px;
+    padding: 20px;
+    outline: 2px solid #ddd;
+    background-color: #222;
+    display: grid;    outline: 2px solid #ddd;
+    grid-template-rows: 130px 130px;
+    grid-template-columns: 3fr 3fr;
+    justify-content: center;
+}
+.bagPokemon__div{
+    border-radius: 14px;
+    padding: 13px;
+    outline: 2px solid #ddd;
+    background-color: #222;
+    display: grid;
+    grid-template-rows: 150px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    justify-content: center;
+}
+.pokemon-btn{
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    text-align: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.item-poke-btn{
+    margin: 5px;
+}
+.defeat_btn{
+    opacity: 0.4;
+}
+.principal-fight {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Dos columnas para el combate y una para la información */
+    gap: 20px; /* Espacio entre las columnas */
+    margin: 20px;
+}
+.information-side_bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: #555;
+    width: 100%; /* Ajusta el ancho de la barra de información */
+    height: 350px; /* Ajusta el alto según sea necesario */
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    border-radius: 24px;
+}
+.information-side_bar__div{
+    text-align: center;
+    border-radius: 14px;
+    margin: 20px;
+    background-color: #333;
+}
+.information{
+    margin: 40px;
+    border-top: 2px solid #000;
+}
+
+.item-btn{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.item-item-btn{
+    margin: 4px;
+}
+.item-attack{
+    margin: 8px;
+}
+.money{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+}
+.animation-takeDamage{
+    animation-duration: 0.1s;
+    animation-iteration-count: 4;
+    animation-name: takeDamage;
+}
+
+@keyframes takeDamage {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
+    }
+}
+
+@keyframes attackToEnemy {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(70px, -20px);
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+@keyframes attackToPlayer {
+    0% {
+        transform: translate(0, 0);
+    }
+    50% {
+        transform: translate(-70px, 20px );
+    }
+    100% {
+        transform: translate(0, 0);
+    }
+}
+.appear{
+    animation: appear 0.7s ease-in-out;
+}
+@keyframes appear {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+        transform: scale(0.3);
+        filter: blur(3px) brightness(0.5) hue-rotate(220deg); /* Blue filter effect */
+    }
+    50%{filter: blur(3px) brightness(0.5) hue-rotate(220deg);
+        transform: scale(0.7);}
+    70%{filter: blur(3px) brightness(0.5) hue-rotate(220deg);
+        transform: scale(0.5);}
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        transform: scale(1);
+        filter: blur(0) brightness(1) hue-rotate(0deg); /* Reset to normal */
+    }
+
+}
+.attacking {
+    animation: attackToEnemy 0.5s ease-in-out;
+}
+.attackingToPlayer{
+    animation: attackToPlayer 0.5s ease-in-out;
+}
+button{
+    transition: 0.3s transform;
+}
+button:hover{
+    transform:scale(108%)
+}
+
+.win{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: auto;
+    height: 100dvh;
+    font-size: 50px;
+}
+
+
+.dis{
+    display: none;
+}
