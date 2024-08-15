@@ -33,11 +33,14 @@ let timesPlayerConfirmMoves =[]
 import { getPokemonSpecificMovesAxios ,getAllMoves } from "./moves.js";
 
 const getAllPokemonsNames = async () => {
-    const res = await axios("https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0");
-    const pokemons = Object.values(res.data.results);
-    pokemons.forEach(poke => {
-        createOptionPokemon(poke.name);
-    });
+    for (let i = 1; i < 6; i++) {
+        const res = await axios(`https://pokeapi.co/api/v2/generation/${i}/`);
+        const pokemons = Object.values(res.data.pokemon_species);
+        pokemons.forEach(poke => {
+            createOptionPokemon(poke.name);
+        });
+    }
+
 };
 
 const createOptionPokemon = (pokemon) => {
