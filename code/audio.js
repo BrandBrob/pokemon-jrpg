@@ -1,7 +1,7 @@
 
 
-const BGaudio = new Audio("/assets/battle1.mp3")
-const lowHp = new Audio("/assets/lowhealth.mp3")
+const BGaudio = new Audio("./assets/battle1.mp3")
+const lowHp = new Audio("./assets/lowhealth.mp3")
 const body = document.getElementById("body")
 BGaudio.play()
 BGaudio.loop = true

@@ -36,7 +36,7 @@ import {cryPokemon,lowHp,BGaudio,playLowHpMusic,playBGmusic} from "./audio.js"
 
 //Obtiene datos guardados de los pokemones enemigos para poder usarlos en el todo el codigo. El json se creo mediante el main.js (la seleccion de los pokemon)
 const getDataJson = async()=>{
- const res = await axios("/enemyPokemons.json")
+ const res = await axios("./enemyPokemons.json")
  return res.data
 }
 let turn = { //No se para que sirve pero lo hice
