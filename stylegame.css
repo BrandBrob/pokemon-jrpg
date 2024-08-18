@@ -299,3 +299,20 @@ button:hover{
 .dis{
     display: none;
 }
+
+@media only screen and (max-width: 800px) {
+
+    .principal-fight {
+        display: grid;
+        grid-template-columns: 480px 1fr; /* Dos columnas para el combate y una para la información */
+        gap: 20px; /* Espacio entre las columnas */
+        margin: 20px;
+    }
+    .information-container{
+        display: flex;
+        justify-content: center;
+        align-items: ceter;
+    }
+
+  }
+
