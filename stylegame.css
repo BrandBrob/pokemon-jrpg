@@ -311,8 +311,98 @@ button:hover{
     .information-container{
         display: flex;
         justify-content: center;
-        align-items: ceter;
+        align-items: center;
     }
 
   }
 
+@media only screen and (max-width:600px){
+    body{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        overflow: auto;
+    }
+    .player__div{
+        display: flex;
+        flex-direction: column-reverse;
+        align-self: flex-start;
+        margin:auto;
+
+    }
+    .player-pokemon{
+        align-self: flex-start;
+    }
+    .enemy__div{
+        display: flex;
+        flex-direction: column-reverse;
+        margin: auto;
+        margin-bottom: 20px;
+    }
+    .img{
+        margin: auto;
+        width: 100px;
+    }
+    .principal-fight{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .combat{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .pokemon-information{
+        outline: none;
+        padding: 20px;
+        align-items: flex-start;
+        border-radius: 20px;
+        height: 30px;
+        width: 300px;
+        background-color: #333;
+    }
+    .selecction__div{
+        margin: 0px;
+        height: 40dvh;
+    }
+    .info-item{
+        margin: 0px;
+    }
+    .health-bar-div{
+        width: 300px;
+    }
+    .information-container{
+    margin: auto;
+
+    }
+    .information-side_bar{
+        max-height: 70px;
+    }
+    /* .bagPokemon__div{
+        border-radius: 14px;
+        padding: 13px;
+        outline: 2px solid #ddd;
+        background-color: #222;
+        display: grid;
+        grid-template-rows: 150px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        justify-content: center;
+    } */
+    .bagPokemon__div{
+        height: 300px;
+        display: grid;
+        grid-template-columns: 1fr 1fr ;
+    }
+    .item-btn, .money{
+        margin: auto;
+    }
+    .item-attack{
+        text-align:start;
+        margin: 4px;
+    }
+    .dis{
+        display: none;
+    }
+}
