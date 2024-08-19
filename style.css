@@ -1,4 +1,6 @@
 body {
+    display: flex;
+    flex-direction: column;
     background-color: #222; /* Fondo blanco */
     color: #0000ff; /* Letras en color azul */
     font-family: 'Pixelify Sans', sans-serif;
@@ -7,6 +9,7 @@ body {
 }
 
 .nav {
+    box-shadow: 0px 0px 10px 0.3px #111;
     background-color: #333; /* Fondo azul */
     color: #ffffff; /* Letras blancas */
     padding: 1rem;
@@ -21,6 +24,7 @@ body {
 }
 
 .div-main, .div-moves, .div-mid {
+    box-shadow: 0px 0px 10px 0.3px #111;
     padding: 1rem;
     border: 1px solid #0000ff;
     margin: 1rem;
@@ -40,6 +44,7 @@ body {
     flex-direction: column;
 }
 .inputs-container {
+    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,12 +52,14 @@ body {
 }
 
 .div-inputs {
+    
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
 #inp-text {
+    box-shadow: 0px 0px 10px 0.3px #111;
     margin: 10px 0px 0px 0px;
     padding: 0.5rem;
     border: 1px solid #0000ff;
@@ -109,16 +116,17 @@ img{
 }
 
 .moves-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
 }
 
 .move-container {
+    box-shadow: 0px 0px 10px 0.3px #111;
     border: 1px solid #0000ff;
     padding: 0.5rem;
     border-radius: 4px;
-    background-color: #eee; /* Fondo blanco muy claro */
+    background-color: #111; /* Fondo blanco muy claro */
     transition: 1s all
 }
 
@@ -156,6 +164,8 @@ img{
 }
 
 button {
+    margin: 10px;
+    box-shadow: 0px 0px 10px 0.3px #111;
     background-color: #444;
     color: #ffffff;
     border: none;
@@ -179,6 +189,34 @@ button:hover {
     50%{background-color: #0000ff;}
     100%{background-color: #333;}
 }
+.main-footer{
+    box-shadow: 0px 0px 10px 0.3px #111;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100%;
+    background-color: #111;
+    padding: 10px;
+}
+.footer-item{
+    margin: 10px;
+}
+.info-content{
+    display: flex;
+    align-items: center;
+}
+i{
+    font-size: 30px;
+}
 .dis {
     display: none;
+}
+
+@media only screen and (max-width: 500px){
+    .move-container{
+        grid-template-columns: 100px 100px;
+        min-width: 100px;
+    }
+    
 }

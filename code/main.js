@@ -220,6 +220,7 @@ const confirmAllPokemonsHandler = () => {
         button.classList.remove("dis");
         button.setAttribute("id", `chooseMoves-${index + 1}`);
         button.addEventListener("click", async (e) => {
+            e.target.disabled = true
             if(document.getElementById(e.target.attributes[1].nodeValue).classList.contains("loadAnim") ||  document.getElementById(e.target.attributes[1].nodeValue).style.background == "green"){
             document.getElementById(e.target.attributes[1].nodeValue).classList.remove("loadAnim")}
             else{
