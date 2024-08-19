@@ -341,6 +341,8 @@ const addEventListenerToInputsMove = (index) => {
         
         input.addEventListener("keypress", async (e) => {
             if (e.key === 'Enter') {
+                console.log(e.target.classList.add("dis"))
+                console.log(e.target)
                 let inputId = input.getAttribute("id");
                 let id = inputId.split("-")[3];
                 const moveName = input.value.trim().toLowerCase();
@@ -379,7 +381,8 @@ const handleConfirmMovesClick = () => {
     let index = choosePokemonIndex;
     const moveDiv = document.querySelectorAll(".move-container")
     moveDiv.forEach(div=>{ div.classList.remove("done") })
-
+    const inputs = document.querySelectorAll(".input-chose")
+    inputs.forEach((inp)=>{inp.classList.remove("dis")})
     for (let i = 1; i <= finalMoves.length; i++) {
         document.getElementById(`move-name-${i}`).innerHTML = "";
         document.getElementById(`move-type-${i}`).innerHTML = "";

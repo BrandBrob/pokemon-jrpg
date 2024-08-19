@@ -300,7 +300,7 @@ button:hover{
     display: none;
 }
 
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 900px) {
 
     .principal-fight {
         display: grid;
@@ -325,9 +325,11 @@ button:hover{
     }
     .player__div{
         display: flex;
-        flex-direction: column-reverse;
+        justify-content: flex-start;
+        flex-flow: column-reverse;
         align-self: flex-start;
         margin:auto;
+        margin-right:100px
 
     }
     .player-pokemon{
@@ -335,9 +337,10 @@ button:hover{
     }
     .enemy__div{
         display: flex;
-        flex-direction: column-reverse;
+        flex-flow: column-reverse;
         margin: auto;
         margin-bottom: 20px;
+        margin-left: 100px;
     }
     .img{
         margin: auto;
@@ -360,25 +363,24 @@ button:hover{
         align-items: flex-start;
         border-radius: 20px;
         height: 30px;
-        width: 300px;
+        width: 200px;
         background-color: #333;
     }
     .selecction__div{
         margin: 0px;
-        height: 40dvh;
+        height: 35dvh;
     }
     .info-item{
         margin: 0px;
     }
     .health-bar-div{
-        width: 300px;
+        width: 200px;
     }
     .information-container{
     margin: auto;
-
     }
     .information-side_bar{
-        max-height: 70px;
+        max-height: 100px;
     }
     /* .bagPokemon__div{
         border-radius: 14px;
@@ -390,6 +392,10 @@ button:hover{
         grid-template-columns: 1fr 1fr 1fr 1fr;
         justify-content: center;
     } */
+    .menuPokemon{
+        margin: 0px;
+        height: 35dvh;
+    }
     .bagPokemon__div{
         height: 300px;
         display: grid;
