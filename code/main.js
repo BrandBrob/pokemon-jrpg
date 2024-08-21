@@ -19,6 +19,8 @@ const confirmAllPokemon = document.getElementById("confirm-all-btn");
 const confirmTeam = document.getElementById("confirm-changes")
 const pokemonSelectedForMoves = document.getElementById("pokemon-selected-for-moves")
 const confirmMovesBtn = document.getElementById("btn-confirmMoves")
+const divLocalStorage = document.getElementById("saved-pokemon")
+
 let pokemon = "";
 const PokemonAbilities = [];
 let playerPokemons = []; //Array principal donde se guardan los pokemones del jugador se usara durante todo el tiempo
@@ -28,8 +30,8 @@ const movesMax = [1,2,3,4]
 const inputsMove = [1,2,3,4]
 let dataListMoves = []
 let choosePokemonIndex = ""
-let timesPlayerConfirmMoves =[]
-
+let timesPlayerConfirmMoves = 0
+let localStoragePokemons //Storage all the pokemons from the localStorage
 import { getPokemonSpecificMovesAxios ,getAllMoves } from "./moves.js";
 
 const getAllPokemonsNames = async () => {
@@ -70,36 +72,33 @@ const getPokemonAxios = async () => {
     }
 };
 
-const savePokemons = async () => {
+const savePokemons = async (data) => {
     try{
     const res = await axios(`https://pokeapi.co/api/v2/pokemon/${pokemon}/`);
     if (playerPokemons.length < 6) {
-        playerPokemons.push([res.data.name, res.data]);
+        if(res){
+        playerPokemons.push([res.data.name, res.data]);}
+
         const pokemonDiv = document.createElement("div");
         const tinyEraseBtn = document.createElement("button"); tinyEraseBtn.classList.add("eraseBtn")
-        const settingsButton = document.createElement("button"); settingsButton.classList.add("settingBtn")
-        const chooseMovesButton = document.createElement("button"); chooseMovesButton.classList.add("chooseMovesButton")
+
+        pokemonDiv.classList.add("pokemon");
+        pokemonDiv.setAttribute("id", playerPokemons.length);
         tinyEraseBtn.innerHTML = "X";
         tinyEraseBtn.classList.add("dis") 
-        settingsButton.classList.add("dis");
-        chooseMovesButton.classList.add("dis")
-        chooseMovesButton.innerHTML ="Choose the pokemon moves"
-        settingsButton.innerHTML = "Show Skills";
 
+        pokemonDiv.innerHTML += `
+        <p>${playerPokemons[playerPokemons.length - 1][0].toUpperCase()}</p>
+        <button class="chooseMovesButton dis">Choose the pokemon moves</button>
+        <button class="settingBtn dis">Show Skills</button>
+        <div class="hasMoves dis">Moves Selected<div>
+        `
         tinyEraseBtn.addEventListener("click", () => {
             eliminatePokemonFromArray(pokemonDiv.getAttribute("id"));
         });
 
-        pokemonDiv.classList.add("pokemon");
-        pokemonDiv.setAttribute("id", playerPokemons.length);
-
-        const p = document.createElement("p");
-        p.innerHTML = playerPokemons[playerPokemons.length - 1][0].toUpperCase();
         ChoosenPokemonDiv.appendChild(pokemonDiv);
-        pokemonDiv.appendChild(p);
         pokemonDiv.appendChild(tinyEraseBtn);
-        pokemonDiv.appendChild(chooseMovesButton)
-        pokemonDiv.appendChild(settingsButton);
         eraseButtonsActive(tinyEraseBtn);
         console.log(playerPokemons);
 
@@ -110,14 +109,63 @@ const savePokemons = async () => {
     }
 } 
 catch(e){
-    console.log(alert("Primero busca el pokemon con el boton search"))
+    console.log(e)
+    alert("Try to search the pokemon with the button search")
     return
 }
+
+
+};
+
+const usePokemonFromLocalStorage = async (data) => {
+    try{
+    const res = await axios(`https://pokeapi.co/api/v2/pokemon/${pokemon}/`);
+    if (playerPokemons.length < 6) {
+        if(data){
+        playerPokemons.push(data)}
+        console.log(data)
+        const pokemonDiv = document.createElement("div");
+        const tinyEraseBtn = document.createElement("button"); tinyEraseBtn.classList.add("eraseBtn");
+
+        pokemonDiv.classList.add("pokemon");
+        pokemonDiv.setAttribute("id", playerPokemons.length);
+        tinyEraseBtn.innerHTML = "X";
+        tinyEraseBtn.classList.add("dis") 
+
+        pokemonDiv.innerHTML += `
+        <p>${playerPokemons[playerPokemons.length - 1][0].toUpperCase()}</p>
+        <button class="chooseMovesButton dis">Choose the pokemon moves</button>
+        <button class="settingBtn dis">Show Skills</button>
+        <div class="hasMoves dis">Moves Selected<div>
+        `
+        
+        tinyEraseBtn.addEventListener("click", () => {
+            eliminatePokemonFromArray(pokemonDiv.getAttribute("id"));
+        });
+
+
+        ChoosenPokemonDiv.appendChild(pokemonDiv);
+        pokemonDiv.appendChild(tinyEraseBtn);
+        eraseButtonsActive(tinyEraseBtn);
+        console.log(playerPokemons);
+
+        if (playerPokemons.length === 6) {
+            alert("The limit is 6 Pokémon!");
+        }
+        confirmAllPokemonsFunction();
+    }
+} 
+catch(e){
+    console.log(e)
+    return
+}
+
 
 };
 
 const eraseButtonsActive = (tinyEraseBtn) => {
     eraseBtn.addEventListener("click", () => {
+        console.log("Pene")
         tinyEraseBtn.classList.remove("dis");
     });
 };
@@ -190,12 +238,42 @@ const confirmAllPokemonsFunction = () => {
         confirmAllPokemon.addEventListener("click", confirmAllPokemonsHandler);
     }
 };
+const hasMovesHandler = ()=>{
+    const hasMovesDiv = document.querySelectorAll(".hasMoves")
+    const chooseMovesButtons = document.querySelectorAll(".chooseMovesButton")
+    hasMovesDiv.forEach((hasMoves,index)=>{
+        if(playerPokemons[index].length == 3){
+            hasMoves.classList.remove("dis")
+        } else{
+            hasMoves.classList.add("dis")
+        }
+    });
+    chooseMovesButtons.forEach((btn,index)=>{
+        if(playerPokemons[index].length == 3){
+            btn.innerHTML = " Double-click to change the moves "
+        } else{
+            btn.innerHTML =" Choose the pokemon moves "
+        }
+    })
 
+}
 const confirmAllPokemonsHandler = () => {
         //Ocultar todos los bottones de borrar
         const eraseBtns = document.querySelectorAll(".eraseBtn")
         eraseBtns.forEach(btn => {btn.classList.add("dis")});
+        document.querySelector(".continue-game").classList.add("dis")
+        hasMovesHandler()
 
+        playerPokemons.forEach(poke => { //If All pokemons has moves selected it allows the player to continue and play the game
+            console.log(poke)
+            if(poke.length == 3){
+                timesPlayerConfirmMoves++
+            }
+            console.log(timesPlayerConfirmMoves)
+        });
+        if(timesPlayerConfirmMoves == playerPokemons.length){
+            confirmTeam.classList.remove("dis")
+        }
     console.log(playerPokemons);
     confirmAllPokemon.classList.add("dis");
     eraseBtn.classList.add("dis");
@@ -221,6 +299,7 @@ const confirmAllPokemonsHandler = () => {
         button.setAttribute("id", `chooseMoves-${index + 1}`);
         button.addEventListener("click", async (e) => {
             e.target.disabled = true
+            hasMovesHandler()
             if(document.getElementById(e.target.attributes[1].nodeValue).classList.contains("loadAnim") ||  document.getElementById(e.target.attributes[1].nodeValue).style.background == "green"){
             document.getElementById(e.target.attributes[1].nodeValue).classList.remove("loadAnim")}
             else{
@@ -341,7 +420,6 @@ const addEventListenerToInputsMove = (index) => {
         
         input.addEventListener("keypress", async (e) => {
             if (e.key === 'Enter') {
-                console.log(e.target.classList.add("dis"))
                 console.log(e.target)
                 let inputId = input.getAttribute("id");
                 let id = inputId.split("-")[3];
@@ -356,8 +434,13 @@ const addEventListenerToInputsMove = (index) => {
                     document.getElementById(`move-pp-${id}`).innerHTML = `PP: ${foundMove.pp}`;
                     
                     document.getElementById(`move-effect-${id}`).innerHTML = foundMove.entries?.effect ?? 'No effect available.';
-
+                    console.log(finalMoves)
+                    if(finalMoves.length < 4){ //Condicionales que hacen que el jugador puede sobreescribir movimientos finales :)
                     finalMoves.push(foundMove);
+                    } 
+                    else if(finalMoves.length == 4){
+                        finalMoves.splice(id - 1,1, foundMove )
+                    }
                     input.value = "";
 
                     if (finalMoves.length >= 4) {
@@ -374,15 +457,22 @@ const addEventListenerToInputsMove = (index) => {
 };
 
 const handleConfirmMovesClick = () => {
-    timesPlayerConfirmMoves.push(1)
-    if(timesPlayerConfirmMoves.length == playerPokemons.length){
+    hasMovesHandler() //Makes FeedBack to the player, he can see if he choosed moves for the pokemon
+    // timesPlayerConfirmMoves.push(1)
+    playerPokemons.forEach(poke => {
+        console.log(poke)
+        if(poke.length == 3){
+            timesPlayerConfirmMoves++
+        }
+        console.log(timesPlayerConfirmMoves)
+    });
+    if(timesPlayerConfirmMoves == playerPokemons.length){
         confirmTeam.classList.remove("dis")
     }
     let index = choosePokemonIndex;
     const moveDiv = document.querySelectorAll(".move-container")
     moveDiv.forEach(div=>{ div.classList.remove("done") })
-    const inputs = document.querySelectorAll(".input-chose")
-    inputs.forEach((inp)=>{inp.classList.remove("dis")})
+
     for (let i = 1; i <= finalMoves.length; i++) {
         document.getElementById(`move-name-${i}`).innerHTML = "";
         document.getElementById(`move-type-${i}`).innerHTML = "";
@@ -407,6 +497,42 @@ confirmTeam.addEventListener("click",()=>{
 
 
 })
+
+const dataTeam = localStorage.getItem("pokemons")
+if(dataTeam){
+    document.querySelector(".continue-game").classList.remove("dis")
+    const continueBtn = document.getElementById("continue-btn")
+    const useLocalStoragePokemonsBtn = document.getElementById("use-pokemons-btn")
+    useLocalStoragePokemonsBtn.addEventListener("click",()=>{
+        if(playerPokemons.length + localStoragePokemons.length > 6){
+            alert("You must erase some pokemons to use these pokemons")
+        }else{
+            localStoragePokemons.forEach(poke => {
+                usePokemonFromLocalStorage(poke)
+            });
+            console.log(playerPokemons)
+            document.querySelector(".continue-game").classList.add("dis")
+        }
+
+    })
+    continueBtn.addEventListener("click",()=>{
+        window.open("jrpg.html")}
+    )
+    localStoragePokemons = JSON.parse(dataTeam)
+    console.log(localStoragePokemons)
+    localStoragePokemons.forEach(poke => {
+        console.log(poke)
+        divLocalStorage.innerHTML +=`<div class="continue-item continue-pokemon_div" id="localStorage-pokemon">
+                                        <h4>${poke[0].toUpperCase()[0]}${poke[0].substring(1)}</h4>
+                                        <img src =${poke[1].sprites.versions["generation-v"]["black-white"]["animated"]["front_default"]}>
+                                    </div>`
+    });
+
+}else {
+    document.querySelector(".continue-game").classList.add("dis")
+    console.log("There are no pokemons in the localStorage")
+}
+
 
 getAllPokemonsNames()//Datalist Options
 confirmAllPokemonsFunction();// Start the function

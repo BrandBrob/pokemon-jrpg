@@ -153,12 +153,7 @@ body{
     justify-content: center;
 }
 .pokemon-btn{
-    display: flex;
-    justify-content: center;
-    align-content: flex-start;
-    text-align: center;
-    flex-wrap: wrap;
-    flex-direction: column;
+    display: block;
 }
 .item-poke-btn{
     margin: 5px;
@@ -394,19 +389,23 @@ button:hover{
     } */
     .menuPokemon{
         margin: 0px;
-        height: 35dvh;
+        height: 100%;
     }
     .bagPokemon__div{
         height: 300px;
         display: grid;
         grid-template-columns: 1fr 1fr ;
     }
+    .pokemon-btn
     .item-btn, .money{
         margin: auto;
     }
     .item-attack{
         text-align:start;
         margin: 4px;
+    }
+    .open-menu{
+        margin: auto;
     }
     .dis{
         display: none;
