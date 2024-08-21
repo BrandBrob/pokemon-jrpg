@@ -269,7 +269,6 @@ const confirmAllPokemonsHandler = () => {
             if(poke.length == 3){
                 timesPlayerConfirmMoves++
             }
-            console.log(timesPlayerConfirmMoves)
         });
         if(timesPlayerConfirmMoves == playerPokemons.length){
             confirmTeam.classList.remove("dis")
@@ -466,7 +465,7 @@ const handleConfirmMovesClick = () => {
         }
         console.log(timesPlayerConfirmMoves)
     });
-    if(timesPlayerConfirmMoves == playerPokemons.length){
+    if(timesPlayerConfirmMoves >= playerPokemons.length){
         confirmTeam.classList.remove("dis")
     }
     let index = choosePokemonIndex;
