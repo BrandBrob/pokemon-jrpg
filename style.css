@@ -223,18 +223,25 @@ i{
     flex-flow: column wrap;
     
 }
-.pokemons-div{
+.continue-btn_div{
     display: grid;
-    grid-template-columns: 200px 200px;
+    grid-template-columns: 1fr 1fr;
 }
 .continue-pokemon_div {
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
     flex-flow: column wrap;
 }
+
+.pokemons-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.continue-item{
+    margin: 5px;
+}
 .continue-pokemon_div img{
-    
     width: 100px;
 
 }
