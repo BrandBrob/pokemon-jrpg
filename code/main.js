@@ -33,7 +33,7 @@ let choosePokemonIndex = ""
 let timesPlayerConfirmMoves = 0
 let localStoragePokemons //Storage all the pokemons from the localStorage
 import { getPokemonSpecificMovesAxios ,getAllMoves } from "./moves.js";
-
+import{} from "./sidebar.js"
 const getAllPokemonsNames = async () => {
     for (let i = 1; i < 6; i++) {
         const res = await axios(`https://pokeapi.co/api/v2/generation/${i}/`);

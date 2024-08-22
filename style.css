@@ -3,9 +3,15 @@ body {
     flex-direction: column;
     background-color: #222; /* Fondo blanco */
     color: #0000ff; /* Letras en color azul */
+    --main-color:#0000ff;
+    --nav-color:#627ff5;
     font-family: 'Pixelify Sans', sans-serif;
     margin: 0;
     padding: 0;
+}
+a{
+    text-decoration: none;
+    color:inherit;
 }
 
 .nav {
@@ -13,15 +19,104 @@ body {
     background-color: #333; /* Fondo azul */
     color: #ffffff; /* Letras blancas */
     padding: 1rem;
-    text-align: center;
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
+}
+
+.nav i{
+    margin: auto;
+    cursor: pointer;
+    font-size: 30px;
 }
 
 .nav-h1 {
-    margin: 0;
+    margin: auto;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
     font-size: 2rem;
 }
+
+.sidebar{
+    color: var(--nav-color);
+    background-color: #111;
+    height: 100dvh;
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+.sidebar_div-title{
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--nav-color);
+}
+
+.sidebar_btn{
+    all: unset;
+    padding: 10px;
+    margin: 3px;
+    cursor: pointer;
+}
+.sidebar_btn:hover{
+    background-color: #222;
+    color: #eee;
+}
+.sidebar_nav{
+    flex:1;
+    display: flex;
+    align-items: flex-start;
+}
+.sidebar_ul{
+    padding-left: 0px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    text-decoration: none;
+}
+.sidebar_ul-li{
+    margin-top: 20px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    text-transform: uppercase;
+}
+.sidebar_ul-li:hover{
+    background-color: #222;
+    color: #eee;
+}
+.sidebar_ul-li i{
+    padding: 12px;
+}
+
+li button{
+    all:unset
+}
+li button:hover{
+    all: unset;
+}
+.sidebar_information_div{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    border-top: 2px solid var(--nav-color);
+    padding: 10px;
+}
+.sidebar_information_div img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.sidebar_information-item{
+    margin: 7px;
+}
+.sidebar_information_div i{
+    align-self: flex-end;
+}
+
 
 .div-main, .div-moves, .div-mid, .continue-game,.continue-pokemon_div {
     box-shadow: 0px 0px 10px 0.3px #111;
@@ -181,7 +276,7 @@ button {
 }
 
 button:hover {
-    background-color: #111; /* Color más oscuro al pasar el ratón */
+    background-color: #111;
 }
 .loadAnim{
     animation: load 1s linear infinite;
