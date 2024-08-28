@@ -20,6 +20,7 @@ const confirmTeam = document.getElementById("confirm-changes")
 const pokemonSelectedForMoves = document.getElementById("pokemon-selected-for-moves")
 const confirmMovesBtn = document.getElementById("btn-confirmMoves")
 const divLocalStorage = document.getElementById("saved-pokemon")
+let counth4 = document.getElementById("pokemons-count")
 
 let pokemon = "";
 const PokemonAbilities = [];
@@ -34,6 +35,25 @@ let timesPlayerConfirmMoves = 0
 let localStoragePokemons //Storage all the pokemons from the localStorage
 import { getPokemonSpecificMovesAxios ,getAllMoves } from "./moves.js";
 import{} from "./sidebar.js"
+import{getPresets} from "./pokemonpresets.js"
+for (let i = 0; i < 2; i++) {
+    console.log(i)
+    getPresets(i)
+    
+}
+
+const updatePokemonCount = ()=>{
+    counth4.innerHTML=`${playerPokemons.length}/6`
+}
+const updatePokemonHasMovesCount =(e)=>{
+
+    counth4.innerHTML=`Count of pokemons that has moves: 0/${playerPokemons.length}`
+    playerPokemons.forEach((poke,index) => {
+        if(poke.length == 3){
+                counth4.innerHTML=`Count of pokemons that has moves: ${0}/${playerPokemons.length}`
+        }
+    });
+}
 const getAllPokemonsNames = async () => {
     for (let i = 1; i < 6; i++) {
         const res = await axios(`https://pokeapi.co/api/v2/generation/${i}/`);
@@ -78,7 +98,7 @@ const savePokemons = async (data) => {
     if (playerPokemons.length < 6) {
         if(res){
         playerPokemons.push([res.data.name, res.data]);}
-
+        updatePokemonCount()
         const pokemonDiv = document.createElement("div");
         const tinyEraseBtn = document.createElement("button"); tinyEraseBtn.classList.add("eraseBtn")
 
@@ -165,7 +185,6 @@ catch(e){
 
 const eraseButtonsActive = (tinyEraseBtn) => {
     eraseBtn.addEventListener("click", () => {
-        console.log("Pene")
         tinyEraseBtn.classList.remove("dis");
     });
 };
@@ -173,6 +192,7 @@ const eraseButtonsActive = (tinyEraseBtn) => {
 const eliminatePokemonFromArray = (id) => { //Funciona Que elimina un pokemon del playerPokemons y que tambien actualiza su id, // ERROR 
     const index = parseInt(id) - 1;
     playerPokemons.splice(index, 1);
+    updatePokemonCount()
     console.log(playerPokemons); // Shows the actual array
     document.querySelector(`.pokemon[id='${id}']`).remove();
     // Adjust the IDs of the remaining Pokémon divs
@@ -227,7 +247,11 @@ inpSearch.addEventListener("click", () => {
 inpConfirmPokemon.addEventListener("click", ()=>{
     pokemon = inpPoke.value.trim().toLowerCase();
     if(pokemon){
+        console.log(playerPokemons)
+        updatePokemonCount()
         savePokemons()
+
+
     }
 });
 
@@ -259,6 +283,7 @@ const hasMovesHandler = ()=>{
 }
 const confirmAllPokemonsHandler = () => {
         //Ocultar todos los bottones de borrar
+        updatePokemonHasMovesCount()
         const eraseBtns = document.querySelectorAll(".eraseBtn")
         eraseBtns.forEach(btn => {btn.classList.add("dis")});
         document.querySelector(".continue-game").classList.add("dis")
@@ -298,6 +323,7 @@ const confirmAllPokemonsHandler = () => {
         button.setAttribute("id", `chooseMoves-${index + 1}`);
         button.addEventListener("click", async (e) => {
             confirmTeam.classList.add("dis")
+            console.log(e.target.disabled )
             e.target.disabled = true
             hasMovesHandler()
             if(document.getElementById(e.target.attributes[1].nodeValue).classList.contains("loadAnim") ||  document.getElementById(e.target.attributes[1].nodeValue).style.background == "green"){
@@ -367,7 +393,6 @@ const disableChooseMoveBtn = (choosen)=>{
             button.style.background = "#ccc"
             button.disabled = true
     }
-            choosenButton.disabled = false
             choosenButton.style.background = "green"
 }
 
@@ -459,6 +484,7 @@ const addEventListenerToInputsMove = (index) => {
 const handleConfirmMovesClick = () => {
     hasMovesHandler() //Makes FeedBack to the player, he can see if he choosed moves for the pokemon
     // timesPlayerConfirmMoves.push(1)
+    updatePokemonHasMovesCount()
     playerPokemons.forEach(poke => {
         console.log(poke)
         if(poke.length == 3){

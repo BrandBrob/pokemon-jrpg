@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pokemon JRPG Home</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="style.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
+        <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
+    </head>
+        <script src="https://kit.fontawesome.com/46f97bff10.js" crossorigin="anonymous"></script>
+        <nav class="nav">
+            <button class="nav_openbtn"id=open-menuBtn >
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        <h1 class="nav-h1">Home</h1>
+    </nav>
+    <aside class="sidebar dis" id="sidebar">
+        <div class="sidebar_div-title">
+            <button class="sidebar_btn" id="close-menuBtn"><i class="fa-solid fa-bars"></i></button>
+            <h2 class="sidebar_h2">POKEMON JRPG</h2>
+        </div>
+            <nav class="sidebar_nav">
+                <ul class="sidebar_ul">
+                    <li class="sidebar_ul-li">
+                        <i class="fa-solid fa-house"></i>
+                        <a class="sidebar_ul_btn" id="home">Home</a>
+                    </li>
+                    <li class="sidebar_ul-li">
+                        <i class="fa-solid fa-dragon"></i>
+                        <a href="index.html" class="sidebar_ul_btn" >Select Your pokemons</a>
+                    </li>
+                    <li class="sidebar_ul-li">
+                        <i class="fa-solid fa-gamepad"></i>
+                        <a href="jrpg.html" class="sidebar_ul_btn" id="continue-game-a" >Continue game</a>
+                    </li>
+                </ul>
+            </nav>
+            <div class="sidebar_information_div">
+                <h4 class="sidebar_information-item sidebar_h4" >The Creator</h4>
+                <img class="sidebar_information-item profile" src="assets/profile.png">
+                <i class="sidebar_information-item fa-brands fa-github"></i>
+            </div>
+    </aside>
+    <header class="header">
+        <h1>Pokemon JRPG</h1>
+        <div class="header_divtext">
+            <h3>In this game you can play with any pokemon you want from generation I to V.</h3>
+        </div>
+        <div class="header_div-characteristics">
+            <div class="header_div-chara div-style" ><h3>Game with pure combat for improving in your pokemons skills</h3></div>
+            <div class="header_div-chara div-style" ><h3>It has animations and information about every pokemon you choose</h3></div>
+            <div class="header_div-chara div-style"><h3>This page has many presets of pokemon teams for choose</h3></div>
+        </div>
+    </header>
+    <section class="section-home div-style white-shadow">
+        <h2>You can start making a pokemon team in the selection menu</h2>
+    </section>
+    <script type="module" src="code/home.js"></script>
+    </body>
+</html>

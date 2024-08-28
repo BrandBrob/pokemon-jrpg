@@ -126,7 +126,7 @@ li button:hover{
 }
 
 
-.div-main, .div-moves, .div-mid, .continue-game,.continue-pokemon_div {
+.div-main, .div-moves, .div-mid, .continue-game,.continue-pokemon_div, .presets_div, .preset, .preset_div, .div-style {
     box-shadow: 0px 0px 10px 0.3px #111;
     padding: 1rem;
     border: 1px solid var(--text-color);
@@ -348,7 +348,50 @@ i{
     width: 100px;
 
 }
-
+.teampresets_div{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.presets_div{
+    margin: 10px;
+}
+.preset_div{
+    margin: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: center;
+    align-items: center;
+}
+.preset-item{
+    margin: 0px;
+}
+.preset-img{
+    width: 50px;
+}
+.header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.header_div-characteristics{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.header_div-chara{
+    text-align: justify;
+    transition: 0.3s box-shadow;
+}
+.header_div-chara:hover{
+    box-shadow: 0px 0px 13px 0.2px #fff;
+}
+.section-home{
+    display: inline-block;
+    text-align: center;
+}
+.white-shadow{
+    box-shadow: 0px 0px 13px 0.2px #fff;
+}
 @keyframes left-to-right {
 	0%,
 	100% {

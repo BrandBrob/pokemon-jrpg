@@ -296,9 +296,6 @@ button:hover{
 }
 
 
-.dis{
-    display: none;
-}
 
 @media only screen and (max-width: 900px) {
 
@@ -412,4 +409,7 @@ button:hover{
     .dis{
         display: none;
     }
+}
+.dis{
+    display: none;
 }
