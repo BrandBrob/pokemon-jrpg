@@ -380,6 +380,7 @@ i{
 .header_div-characteristics{
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
+    flex-wrap: wrap;
 }
 .header_div-chara{
     text-align: justify;
@@ -450,6 +451,10 @@ i{
     .move-container{
         grid-template-columns: 100px 100px;
         min-width: 100px;
+    }
+    .header_div-characteristics{
+        display: flex;
+        flex-wrap: wrap;
     }
     .teampresets_div{
         display: flex;
