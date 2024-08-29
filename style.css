@@ -348,14 +348,14 @@ i{
     width: 100px;
 
 }
+
 .teampresets_div{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
-.presets_div{
-    margin: 10px;
-}
+
 .preset_div{
+    width: 300px;
     margin: 4px;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -373,6 +373,9 @@ i{
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+.header_divtext{
+    text-align: center;
 }
 .header_div-characteristics{
     display: grid;
@@ -443,10 +446,16 @@ i{
 .dis {
     display: none;
 }
-@media only screen and (max-width: 500px){
+@media only screen and (max-width: 650px){
     .move-container{
         grid-template-columns: 100px 100px;
         min-width: 100px;
+    }
+    .teampresets_div{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
     }
     
 }
