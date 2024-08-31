@@ -48,19 +48,48 @@
             </div>
     </aside>
     <header class="header">
-        <h1>Pokemon JRPG</h1>
+        <h1>Welcome to Pokemon JRPG</h1>
         <div class="header_divtext">
             <h3>In this game you can play with any pokemon you want from generation I to V.</h3>
+            <button id="start-btn" class="header-btn">Start Playing</button>
+            <div class="header_div-popup dis">
+                <nav> <button>X</button> </nav>
+                <div class="popupbuttons">
+                    <h3>You have a saved team</h3>
+                    <p>Do you want to continue with the team, or make a new one?</p>
+                    <button id="go-toSelection-btn">Make a new team</button>
+                    <button id="go-toGame-btn">Continue</button>
+                </div>
+            </div>
         </div>
+        <div class="header_div-apart"><h2>Game Features</h2></div>
+
         <div class="header_div-characteristics">
-            <div class="header_div-chara div-style" ><h3>Game with pure combat for improving in your pokemons skills</h3></div>
-            <div class="header_div-chara div-style" ><h3>It has animations and information about every pokemon you choose</h3></div>
-            <div class="header_div-chara div-style"><h3>This page has many presets of pokemon teams for choose</h3></div>
+            <div class="header_div-chara div-style" >
+                <i class="fa-solid fa-gamepad"></i>
+                <h3 class="header-chara_h3">Game with pure combat for improving in your pokemons skills</h3>
+            </div>
+            <div class="header_div-chara div-style" >
+                <i class="fa-brands fa-searchengin"></i>
+                <h3 class="header-chara_h3" >It has animations and information about every pokemon you choose</h3>
+            </div>
+            <div class="header_div-chara div-style">
+                <i class="fa-regular fa-user"></i>
+                <h3 class="header-chara_h3" >There are many presets of pokemon teams for choose</h3>
+            </div>
         </div>
     </header>
     <section class="section-home div-style white-shadow">
         <h2>You can start making a pokemon team in the selection menu</h2>
     </section>
+    <footer class="main-footer">
+        <h4 class="footer-item">Made by: <a href="https://github.com/BrandBrob"> Brandon</a></h4>
+        <h4 class="footer-item">Check the repository of the project!</h4>
+        <div class="info-content">
+            <h5 class="footer-item"><a href="https://github.com/BrandBrob/pokemon-jrpg">Project</a></h5>
+            <i class="fa-brands fa-github"></i>
+        </div>
+    </footer>
     <script type="module" src="code/home.js"></script>
     </body>
 </html>
