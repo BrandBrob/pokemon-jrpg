@@ -15,6 +15,7 @@ openBtn.addEventListener("click",()=>{
 closeBtn.addEventListener("click",()=>{
     sidebar.classList.toggle("dis")
 })
+if(startBtn){
 startBtn.addEventListener("click",()=>{
     if(dataTeam){
         window.open("jrpg.html")
@@ -22,4 +23,5 @@ startBtn.addEventListener("click",()=>{
         window.open("selection.html")
     }
 })
+}
 export{}
