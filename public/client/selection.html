@@ -6,11 +6,11 @@
         <title>Pokemon JRPG Selection Pokemons</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="/css/style.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
-        <link rel="shortcut icon" href="./assets/icon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="../assets/icon.ico" type="image/x-icon">
     </head>
     <body>
         <script src="https://kit.fontawesome.com/46f97bff10.js" crossorigin="anonymous"></script>
@@ -29,21 +29,25 @@
                     <ul class="sidebar_ul">
                         <li class="sidebar_ul-li">
                             <i class="fa-solid fa-house"></i>
-                            <a href="index.html" class="sidebar_ul_btn" id="home" >Home</a>
+                            <a href="/" class="sidebar_ul_btn" id="home" >Home</a>
                         </li>
                         <li class="sidebar_ul-li">
                             <i class="fa-solid fa-dragon"></i>
-                            <a href="selection.html" class="sidebar_ul_btn" id="make-team-a">Select Your pokemons</a>
+                            <a href="/game/selection-menu" class="sidebar_ul_btn" id="make-team-a">Select Your pokemons</a>
                         </li>
                         <li class="sidebar_ul-li">
                             <i class="fa-solid fa-gamepad"></i>
-                            <a href="#" class="sidebar_ul_btn" id="continue-game-a" >Continue game</a>
+                            <a href="/game/jrpg" class="sidebar_ul_btn" id="continue-game-a" >Play Offline</a>
+                        </li>
+                        <li class="sidebar_ul-li">
+                            <i class="fa-solid fa-gamepad"></i>
+                            <a href="/game/online/search-match" class="sidebar_ul_btn" id="game-online" >Online</a>
                         </li>
                     </ul>
                 </nav>
                 <div class="sidebar_information_div">
                     <h4 class="sidebar_information-item sidebar_h4" >The Creator</h4>
-                    <img class="sidebar_information-item profile" src="assets/profile.png">
+                    <img class="sidebar_information-item profile" src="/assets/profile.png">
                     <i class="sidebar_information-item fa-brands fa-github"></i>
                 </div>
         </aside>
@@ -216,7 +220,7 @@
             </div>
         </footer>
         <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
-        <script type="module" src="code/main.js"></script>
+        <script type="module" src="/code/main.js"></script>
         
     </body>
 </html>

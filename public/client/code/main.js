@@ -519,9 +519,8 @@ const handleConfirmMovesClick = () => {
 confirmTeam.addEventListener("click",()=>{
     const dataTeam = JSON.stringify(playerPokemons);
     localStorage.setItem("pokemons",dataTeam)
-    window.open("jrpg.html")
-
-
+    history.pushState("null", "", "/game/jrpg") //Actualiza la ruta hacia el area de jrpg
+    location.reload() //Refresca la pagina para que se vean los cambios
 })
 
 const dataTeam = localStorage.getItem("pokemons")
@@ -542,7 +541,9 @@ if(dataTeam){
 
     })
     continueBtn.addEventListener("click",()=>{
-        window.open("jrpg.html")}
+        history.pushState("null", "", "/game/jrpg") //Actualiza la ruta hacia el area de jrpg
+        location.reload() //Refresca la pagina para que se vean los cambios
+    }
     )
     localStoragePokemons = JSON.parse(dataTeam)
     console.log(localStoragePokemons)

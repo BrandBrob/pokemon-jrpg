@@ -26,13 +26,14 @@ const addPresetToDOM = (pokemon,num) => {
                 playerPokemons = pokemon
                 const dataTeam = JSON.stringify(playerPokemons);
                 localStorage.setItem("pokemons",dataTeam)
-                window.open("jrpg.html")
+                history.pushState("null", "", "/game/jrpg") //Actualiza la ruta hacia el area de jrpg
+                location.reload() //Refresca la pagina para que se vean los cambios
             });
         }
 };
 const getPresets = async(num)=>{
-    const res = await axios(`./assets/presetsJson/preset${num}.json`)
-    console.log("pene",res.data)
+    const res = await axios(`/assets/presetsJson/preset${num}.json`)
+    console.log(res.data)
     presetsPokemons.push(res.data)
     addPresetToDOM(res.data,num)
 
