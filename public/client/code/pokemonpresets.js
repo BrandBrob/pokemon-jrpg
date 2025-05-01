@@ -1,24 +1,34 @@
-const presetsPokemons = []
-let playerPokemons = []
-const teamPresetsDiv = document.getElementById("teampresets")
-
+const presetsPokemons = [];
+let playerPokemons = [];
+const teamPresetsDiv = document.getElementById("teampresets");
+let catsSelected = false;
 const addPresetToDOM = (pokemon,num) => {
     let teamPreset = document.getElementById(`team-preset-${num}`)
     if(teamPreset){
         teamPreset.classList.remove("dis")
         if(num == 0){teamPreset.innerHTML +="<h3>3 Brothers</h3>"}
         else if(num ==1){teamPreset.innerHTML +="<h3>Cynthia Team</h3>"}
-        teamPreset.innerHTML += `<button id= use-preset-btn-${num}>Use Preset</button>`
+        else if(num == 2){teamPreset.innerHTML += "<h3>Papu team</h3>"; teamPreset.classList.add("team-cats");}
+        teamPreset.innerHTML += `<button id= use-preset-btn-${num} class="special-cat-version">Use Preset</button>`
+        document.getElementById("use-preset-btn-2").addEventListener("click", () => {
+            catsSelected = true;
+            console.log(catsSelected)
+        })
     }
-        pokemon.forEach(poke => {
-            console.log(poke)
+
+
+        pokemon.forEach((poke, num) => {
+            
             teamPreset.innerHTML += `
             <div id = preset-${num}>
                 <h4 class="preset-item">${poke[0]}</h4>
                 <img class="preset-item preset-img" src=${poke[1]["sprites"]["front_default"]}>
             </div>
             `
+            
+
         });
+
         const btn = document.getElementById(`use-preset-btn-${num}`);
         if (btn) {
             btn.addEventListener("click", (e) => {
@@ -32,6 +42,7 @@ const addPresetToDOM = (pokemon,num) => {
         }
 };
 const getPresets = async(num)=>{
+    console.log(num)
     const res = await axios(`/assets/presetsJson/preset${num}.json`)
     console.log(res.data)
     presetsPokemons.push(res.data)
@@ -39,4 +50,4 @@ const getPresets = async(num)=>{
 
 }
 
-export{getPresets}
+export{getPresets, catsSelected}

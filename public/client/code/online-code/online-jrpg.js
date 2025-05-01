@@ -102,7 +102,8 @@ for (let i = 1; i <= 4; i++) {
 const turnPlayerDiv = document.querySelector(".information-side_bar__div-player")
 const turnEnemyDiv = document.querySelector(".information-side_bar__div-enemy")
 
-const nextTurn = (playerAction,enemyAction,dealDamageEnemy,dealDamagePlayer)=>{
+const nextTurn = ()=>{
+
     turn.round++
     const infoPlayer = document.createElement("div")
     const infoEnemy = document.createElement("div")
@@ -458,4 +459,3 @@ document.getElementById("run-btn").addEventListener("click",()=>{
 
 console.log(playerPokemons)
 console.log(enemyPokemons)
-export{assingDefaultPokemons}

@@ -36,7 +36,7 @@ let localStoragePokemons //Storage all the pokemons from the localStorage
 import { getPokemonSpecificMovesAxios ,getAllMoves } from "./moves.js";
 import{} from "./sidebar.js"
 import{getPresets} from "./pokemonpresets.js"
-for (let i = 0; i < 2; i++) {
+for (let i = 0; i < 3; i++) {
     console.log(i)
     getPresets(i)
     

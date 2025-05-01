@@ -18,7 +18,7 @@
         <div class="combat">
             <div class="enemy__div principal__div ">
                 <div class="enemy-pokemon">
-                    <img class="enemy-poke__img img appear" id="player-img" src="#">
+                    <img class="enemy-poke__img img" id="player-img" src="#">
                 </div>
                 <div class="information-container">
                     <div class="enemy-bar__div pokemon-information">
@@ -35,7 +35,7 @@
             </div>
             <div class="player__div principal__div">
                 <div class="player-pokemon">
-                    <img class="player-poke__img img appear" id="player-img" src="#">
+                    <img class="player-poke__img img" id="player-img" src="#">
                 </div>
                 <div class="information-container">
                     <div class="player-bar__div pokemon-information">
@@ -113,10 +113,9 @@
 
         </form>
         <div class="win dis">
-            <h4>You Win!</h4>
+            <h4 id="h4-final-msg">You WON!</h4>
         </div>
         <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
-        <script type="module" src="/code/online-code/online-jrpg.js"></script>
-        <script type ="module" src="/code/online-code/socketIOClient.js"></script>
+        <script type ="module" src="/code/online-code/socketIOClient.js" defer></script>
     </body>
 </html>

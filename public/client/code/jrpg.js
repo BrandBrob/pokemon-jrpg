@@ -33,7 +33,6 @@ import { playerPokemons,selecctedPokemon2,baseLevelPokemon,assingPokemonStats, c
 import {enemyHealthNumber,aplyDamage,aplyDamageToPlayer,playerHealthBar,enemyHealthBar,updateHealthBar,types} from "./damageTakedDom.js";
 import {enemyAI,enemyAttacks} from "./enemyAI.js"
 import {cryPokemon,lowHp,BGaudio,playLowHpMusic,playBGmusic} from "./audio.js"
-
 //Obtiene datos guardados de los pokemones enemigos para poder usarlos en el todo el codigo. El json se creo mediante el main.js (la seleccion de los pokemon)
 const getDataJson = async()=>{
  const res = await axios("../assets/presetsJson/enemyPokemons.json")
