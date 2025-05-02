@@ -11,6 +11,18 @@ const playerPokemons = JSON.parse(localStorage.getItem("pokemons"))
 
 let userCount
 let activePlayers = [];
+let roomID;
+
+//Player
+let playerName;
+let playerAllowedToPlayOnline = false;
+
+
+if(localStorage.getItem("pokemons")){
+    playerAllowedToPlayOnline = true;
+} else{
+    document.getElementById("online-pop").classList.remove("dis");
+}
 
 
 
@@ -26,14 +38,12 @@ socket.on("userCount",(userCount) => {
     socket.emit("userCount")
 })
 
-
-
-socket.on("player-accepted", (playerData) => {
+socket.on("start-game", (roomData) => {
     try{
-    activePlayers.push(playerData)
-    console.log(activePlayers)
-    socket.emit("updatePlayers", activePlayers)
-    console.log(socket.id)
+        console.log("Hola pendejos inicio el juego muajaj")
+        console.log(roomData)
+        activePlayers = roomData.players;
+        roomID = roomData.id;
     if(activePlayers.length === 2){
         document.querySelector(".h1-msg").innerHTML = "Player found, ready for a match"
         btnStartMatch.classList.remove("dis")
@@ -61,7 +71,7 @@ socket.on("player-accepted", (playerData) => {
                 const jrpgPage = document.getElementById("jrpg-page")
                 jrpgPage.innerHTML = res.data;
                 jrpgPage.classList.remove("dis")
-                startGame(playerMain, playerTwo) //Starts game, playerMain is the pokemon that is going to be controlled by the client, the other one is goign to be controlled by the other player
+                startGame(playerMain, playerTwo, roomID) //Starts game, playerMain is the pokemon that is going to be controlled by the client, the other one is goign to be controlled by the other player
 
             })
             .catch(error =>{
@@ -76,7 +86,9 @@ socket.on("player-accepted", (playerData) => {
         console.log("Stack Trace: ", error.stack)
     }
 })
-const startGame = (playerMain, playerTwo) => {
+
+
+const startGame = (playerMain, playerTwo, roomID) => {
     const statusGame = {
         avaibleToAttacK: false
     }
@@ -93,26 +105,25 @@ const startGame = (playerMain, playerTwo) => {
     const menuPokemon = document.getElementById("menu-pokemon");
     const menuRun = document.getElementById("menu-run");
     
-const playerDiv = document.querySelector(".player__div")
-const playerInfo = document.querySelector(".player-bar__div")
-const playerName = document.getElementById("player-name")
-const healthNum = document.querySelector(".health-num-player")
-const playerType = document.getElementById("player-types")
+const playerDiv = document.querySelector(".player__div");
+const playerInfo = document.querySelector(".player-bar__div");
+const playerName = document.getElementById("player-name");
+const healthNum = document.querySelector(".health-num-player");
+const playerType = document.getElementById("player-types");
 const playerPokeImg = document.querySelector(".player-poke__img");
 
-const enemyDiv = document.querySelector(".enemy__div")
-const enemyName = document.getElementById("enemy-name")
+const enemyDiv = document.querySelector(".enemy__div");
+const enemyName = document.getElementById("enemy-name");
 const enemyInfo = document.querySelector(".enemy-bar__div")
-const healthNumEnemy = document.querySelector(".enemy-health-num")
-const enemyType = document.getElementById("enemy-types")
+const healthNumEnemy = document.querySelector(".enemy-health-num");
+const enemyType = document.getElementById("enemy-types");
 const enemyPokeImg  = document.querySelector(".enemy-poke__img");
 
 
-const playerHealthNumber = document.querySelector(".health-num-player")
-const enemyHealthNumber = document.querySelector(".enemy-health-num")
-const playerHealthBar = document.querySelector(".player-health-bar")
-const enemyHealthBar = document.querySelector(".enemy-health-bar")
-
+const playerHealthNumber = document.querySelector(".health-num-player");
+const enemyHealthNumber = document.querySelector(".enemy-health-num");
+const playerHealthBar = document.querySelector(".player-health-bar");
+const enemyHealthBar = document.querySelector(".enemy-health-bar");
 
 
     let enemySelecctedPokemon = 0
@@ -132,6 +143,10 @@ const triggerAnimation = (element,anim)=>{ // Animation names: "attackingToPlaye
     setTimeout(()=>{element.classList.remove(anim)},1000)
 }
 
+const updateTypePokemon = (selectedPokemonTypes,selectedType)=>{
+    if(selectedPokemonTypes.length == 1) selectedType.innerHTML = selectedPokemonTypes[0]
+    else selectedType.innerHTML = `${selectedPokemonTypes[0]} ${selectedPokemonTypes[1]}`
+}
 
 
     let playerPokemonTypes = obtainPokemonTypes(playerMain.pokemons[playerMain.selectedPokemon][1].types)
@@ -139,16 +154,18 @@ const triggerAnimation = (element,anim)=>{ // Animation names: "attackingToPlaye
     assingPokemonStats(playerMain.pokemons)
     assingPokemonStats(playerTwo.pokemons)
     //Assing default pokemons
-     //--------Enemy--------//
-    enemyName.innerHTML = playerTwo.id
+     //--------Enemy--------// //INICIALIZACIÓN
+    enemyName.innerHTML = playerTwo.playerName;
     enemyPokeImg.src =playerTwo.pokemons[playerTwo.selectedPokemon][1].sprites.versions["generation-v"]["black-white"].animated["front_default"]
     enemyHealthNumber.innerHTML = `${playerTwo.pokemons[playerTwo.selectedPokemon][3].HP}/${playerTwo.pokemons[playerTwo.selectedPokemon][3].baseHealth}`
+    updateTypePokemon(enemyPokemonTypes, enemyType);
     triggerAnimation(enemyPokeImg, "appear")
     // cryPokemon(playerMain.pokemons[playerMain.selectedPokemon])
-    //--------Player--------//
-    playerName.innerHTML = socket.id
+    //--------Player--------// //INICIALIZACIÓN
+    playerName.innerHTML = playerMain.playerName;
     playerPokeImg.src =playerMain.pokemons[0][1].sprites.versions["generation-v"]["black-white"].animated["back_default"]
     healthNum.innerHTML = `${playerMain.pokemons[0][3].HP}/${playerMain.pokemons[0][3].baseHealth}`
+    updateTypePokemon(playerPokemonTypes, playerType); //
     triggerAnimation(playerPokeImg, "appear")
 
     //Asign events
@@ -182,18 +199,12 @@ const pauseForAttack = () => {
  }
  pauseForAttack()
 
-const updateMenuPokemon = (selectedPokemonTypes,selectedType)=>{
-    if(selectedPokemonTypes.length == 1) selectedType.innerHTML = selectedPokemonTypes[0]
-    else selectedType.innerHTML = `${selectedPokemonTypes[0]} ${selectedPokemonTypes[1]}`
-}
-
 
 const updatePokemon = async (player)=>{
     playerDiv.classList.remove("dis")
     playerPokemonTypes = obtainPokemonTypes(playerMain.pokemons[playerMain.selectedPokemon][1].types)
-
-    updateMenuPokemon(playerPokemonTypes,playerType)
-    playerName.innerHTML = socket.id
+    updateTypePokemon(playerPokemonTypes, playerType);
+    playerName.innerHTML = playerMain.playerName
     playerPokeImg.src = playerMain.pokemons[playerMain.selectedPokemon][1].sprites.versions["generation-v"]["black-white"].animated["back_default"]
     healthNum.innerHTML = `${playerMain.pokemons[playerMain.selectedPokemon][3].HP}/${playerMain.pokemons[playerMain.selectedPokemon][3].baseHealth}`
     menuFight.innerHTML = "";
@@ -209,7 +220,8 @@ const updatePokemon = async (player)=>{
 const updatePokemonEnemy = async () => {
     enemyDiv.classList.remove("dis")
     enemyPokemonTypes = obtainPokemonTypes(playerTwo.pokemons[playerTwo.selectedPokemon][1].types)
-    enemyName.innerHTML = playerTwo.id
+    updateTypePokemon(enemyPokemonTypes, enemyType);
+    enemyName.innerHTML = playerTwo.playerName
     enemyPokeImg.src = playerTwo.pokemons[playerTwo.selectedPokemon][1].sprites.versions["generation-v"]["black-white"].animated["front_default"]
     enemyHealthNumber.innerHTML = `${playerTwo.pokemons[playerTwo.selectedPokemon][3].HP}/${playerTwo.pokemons[playerTwo.selectedPokemon][3].baseHealth}`
 }
@@ -228,7 +240,7 @@ const updatePlayerTwoPlayerMainData = ( ) => {
     console.table(activePlayers)
 }
 
-socket.on("showNewHealth", async (pokemon,totalDamage,socketid) => {
+socket.on("showNewHealth", async (pokemon,totalDamage,socketid, roomID) => {
     if(playerTwo.id === socketid){
         console.log("Player main updates his health")
       let newHP = aplyDamage(totalDamage,playerMain.pokemons[playerMain.selectedPokemon][3])
@@ -332,16 +344,16 @@ const nextTurn = ()=>{ //Function that continues the next turn after the player 
     
 }
 
-socket.on("updateData", ( data ) => {
-    console.log(data)
-    console.log(playerMain)
-    activePlayers = data
-   updatePlayerTwoPlayerMainData()
-    updatePokemon()
-    updatePokemonEnemy()
-    pauseForAttack(playerMain)
-
-
+socket.on("updateData", ( roomData, roomID ) => {
+    activePlayers = roomData.players;
+    if(playerMain.pokemons.length > 0 && playerTwo.pokemons.length > 0){
+   updatePlayerTwoPlayerMainData();
+    updatePokemon();
+    updatePokemonEnemy();
+    updateHealthBar(enemyHealthBar,playerTwo.pokemons[playerTwo.selectedPokemon][3].HP,playerTwo.pokemons[playerTwo.selectedPokemon][3].baseHealth)
+    updateHealthBar(playerHealthBar,playerMain.pokemons[playerMain.selectedPokemon][3].HP,playerMain.pokemons[playerMain.selectedPokemon][3].baseHealth)
+    pauseForAttack(playerMain);
+    }
 })
 //Crea botones de ataque en donde se ejecutara el codigo principal de ataques hacia el enemigo y al jugador.
 const createAttackButtons = (moves)=>{
@@ -381,8 +393,8 @@ const createAttackButtons = (moves)=>{
                 //Player damage to enemy
             totalDamage = await calcuteDMGtoEnemy(move, indexMove)
             console.log({"totalDamage": totalDamage})
-            socket.emit("updateData", activePlayers)
-            socket.emit("showNewHealth", playerTwo.pokemons[playerTwo.selectedPokemon][3],totalDamage, socket.id)
+            socket.emit("updateData", activePlayers, roomID)
+            socket.emit("showNewHealth", playerTwo.pokemons[playerTwo.selectedPokemon][3],totalDamage, socket.id, roomID)
         }else{
             alert("You don't have enought PP")
         }})
@@ -417,12 +429,12 @@ const createPokemonsButtons = (pokemons,defeatPokemons)=>{
             playerTwo.enabledToAttack = true
             playerMain.enabledToAttack = false //The player who attacked to the other pokemon, its propiety "enabledToAttack" will be turned to false, and the function pauseForAttack() will hide (disable) his menu
             pauseForAttack()
-            socket.emit("updateData", activePlayers)
+            socket.emit("updateData", activePlayers, roomID)
             updatePokemon()
             updatePokemonEnemy()
             updateHealthBar(playerHealthBar,poke[3].HP,poke[3].baseHealth)
-            // updateMusic()
-            // cryPokemon(playerPokemons[playerMain.selectedPokemon])
+            updateMusic()
+            cryPokemon(playerPokemons[playerMain.selectedPokemon])
             menuPokemonDiv.classList.add("dis")
             menuPokemon.classList.add("dis")
             principalMenu.classList.add("dis")
@@ -479,22 +491,38 @@ createAttackButtons(playerMain.pokemons[playerMain.selectedPokemon][2])
 createPokemonsButtons(playerMain.pokemons, playerPokemonDefeated)
 }
 
+if(playerAllowedToPlayOnline){
 btnPlay.addEventListener("click", async (e) => {
     e.preventDefault()
+    playerName = document.getElementById("input-name").value;
     document.querySelector(".h1-msg").classList.remove("dis")
     btnPlay.classList.add("dis")
     try{
-    const  playerData =  {number: activePlayers.length + 1, id: socket.id, pokemons: playerPokemons, enabledToAttack: true, selectedPokemon: 0}
-    if(playerData.number == 2){playerData.enabledToAttack = false}
+    const  playerData =  {
+        number: activePlayers.length + 1,
+        id: socket.id,
+        pokemons: playerPokemons,
+        enabledToAttack: true,
+        selectedPokemon: 0,
+        playerName: playerName
+        }
+    if(playerData.number == 2){
+        playerData.enabledToAttack = false
+    }
     console.log(playerData)
     try{
-     socket.emit("player-accepted" , playerData)}
+    socket.emit("join-room", playerData)
+     //socket.emit("player-accepted" , playerData)
+     }
      catch(e){console.log(e); }
     }
     catch(e){
         console.log(e)
     }
 })
+} else{
+
+}
 
 
 export{socket}

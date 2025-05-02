@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", ( ) => {
 
 
 const updateHealthBar = (healthBar, health, baseHealth) => {
+    console.log("ActualizandoBarradevida")
     const percentage = (health / baseHealth) * 100;
     if(percentage > 70){healthBar.style.background ="#009010"}
     if(percentage < 50){healthBar.style.background ="yellow"}
