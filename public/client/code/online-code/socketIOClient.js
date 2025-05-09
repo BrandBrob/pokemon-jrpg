@@ -25,7 +25,6 @@ if(localStorage.getItem("pokemons")){
 }
 
 
-
 socket.on("connect", () => {
     console.log("Connected to server")
     socket.on("updateActiveUsers", (actualPlayers) => {
@@ -138,6 +137,7 @@ const enemyHealthBar = document.querySelector(".enemy-health-bar");
         return pokemonTypes
 }
 
+
 const triggerAnimation = (element,anim)=>{ // Animation names: "attackingToPlayer", "attacking","appear","animation-takeDamage" //Functions that triggers an animation for a pokemon
     element.classList.add(anim)
     setTimeout(()=>{element.classList.remove(anim)},1000)
@@ -168,6 +168,11 @@ const updateTypePokemon = (selectedPokemonTypes,selectedType)=>{
     updateTypePokemon(playerPokemonTypes, playerType); //
     triggerAnimation(playerPokeImg, "appear")
 
+
+    socket.on("enemyDisconnected", () => {
+        alert(`Enemy ${playerTwo.playerName} has been disconnected from the game `);
+    })
+    
     //Asign events
 for (let i = 1; i <= 4; i++) {
     const optionBtn = document.querySelector(`.option_btn-${i}`)
@@ -345,7 +350,9 @@ const nextTurn = ()=>{ //Function that continues the next turn after the player 
 }
 
 socket.on("updateData", ( roomData, roomID ) => {
+    console.log("Data Actualizadas")
     activePlayers = roomData.players;
+    console.log(activePlayers);
     if(playerMain.pokemons.length > 0 && playerTwo.pokemons.length > 0){
    updatePlayerTwoPlayerMainData();
     updatePokemon();
@@ -498,20 +505,19 @@ btnPlay.addEventListener("click", async (e) => {
     document.querySelector(".h1-msg").classList.remove("dis")
     btnPlay.classList.add("dis")
     try{
+
     const  playerData =  {
-        number: activePlayers.length + 1,
+        number: 0,
         id: socket.id,
         pokemons: playerPokemons,
         enabledToAttack: true,
         selectedPokemon: 0,
         playerName: playerName
         }
-    if(playerData.number == 2){
-        playerData.enabledToAttack = false
-    }
-    console.log(playerData)
     try{
+    socket.emit("updateData", activePlayers, roomID);
     socket.emit("join-room", playerData)
+
      //socket.emit("player-accepted" , playerData)
      }
      catch(e){console.log(e); }

@@ -34,7 +34,7 @@ io.on("connection",( socket ) => {
 
                 rooms[roomID].players = rooms[roomID].players.filter(player => player.id !== socket.id);
                 waitingPlayers = waitingPlayers.filter(player => player.id !== socket.id);
-                
+                io.to(roomID).emit("enemyDisconnected")
                 if(rooms[roomID].players.length == 0){
                     roomsCount--
                     delete rooms[roomID]
@@ -48,15 +48,8 @@ io.on("connection",( socket ) => {
         console.log(`An user has disconnected ${socket.id}, left users: ${userCount}`)
         io.emit("userCount", userCount)
         io.emit("updateActiveUsers", activePlayersServer)
-
     })
 
-    socket.on("player-accepted", ( playerData ) => {
-        activePlayersServer.push(playerData)
-        io.emit("player-accepted", (playerData))
-        console.table(activePlayersServer)
-
-    })
     socket.on("join-room", ( playerData) => {
         playerData.socketId = socket.id; // Guardamos el id del socket para poder usarlo despues para unir al jugador 2 al mismo room que jugador 1.
         waitingPlayers.push(playerData); //Añade jugador a la sala de espera
@@ -64,11 +57,15 @@ io.on("connection",( socket ) => {
         if(waitingPlayers.length === 1){
             roomsCount++;
             const roomID = `room-${roomsCount}`;
-
+            playerData.number = 1;
+            console.log(playerData)
             rooms[roomID] = {
                 id: roomID,
                 players: [playerData]
             };
+
+
+            //Saves the roomID ro the secound player
             playerData.roomID = roomID;
             socket.join(roomID);
             console.log(`new room: ${roomID} with ${playerData.id}`);
@@ -76,19 +73,27 @@ io.on("connection",( socket ) => {
             const player1 = waitingPlayers.shift(); //Primer jugador que esperaba elimando de waiting players
             const player2 = waitingPlayers.shift(); //Segundo jugador que esperaba elimando de waiting players
 
+            //Asign number for player for knowing which one its going to attack first, number = 2 equals to no fight first, and number = 1 equals to fight first
+            playerData.number = 1; playerData.enabledToAttack = true;
+             //Asign number for player for knowing which one its going to attack first, number = 2 equals to no fight first, and number = 1 equals to fight first
+            player2.number = 2;
             //Obtener la sala del priemer jugador
             const roomID = player1.roomID;
             //Añadir segundo jugador a la sala existente.
             rooms[roomID].players.push(player2);
             //Guardar roomID al segundo jugador tambien
-            player2.roomID = roomID;
+            player2.roomID = roomID; playerData.enabledToAttack = false;
+
+            console.log(player2)
+
             //Buscar el socket del priemer jugador y unirlo si no lo esta
             const socket1 = io.sockets.sockets.get(player1.socketId);
             if(socket1){socket1.join(roomID)};
             socket.join(roomID); //También une al jugador 2 al socket actual
-            console.log(`Room Full: ${roomID} with ${rooms[roomID].players})`)
+            console.log(`Room Full: ${roomID} with ${rooms[roomID].players})`);
 
             io.to(roomID).emit("start-game",rooms[roomID]);
+            io.to(roomID).emit("updateData",rooms[roomID]);
         }
 
     })
@@ -101,8 +106,8 @@ io.on("connection",( socket ) => {
             players: activePlayersServer
 
         }
+        console.log(rooms[roomID])
         io.to(roomID).emit("updateData", rooms[roomID], roomID)
-        // io.emit("updateData", activePlayersServer)
     })
     socket.on("showNewHealth", (pokemon, totalDamage, socketId, roomID) => {
         console.log({"socketId": socketId})
@@ -110,13 +115,6 @@ io.on("connection",( socket ) => {
         io.to(roomID).emit("showNewHealth", pokemon, totalDamage, socketId )
         // io.emit("showNewHealth", pokemon, totalDamage, socketId )
     })
-
-
-    // socket.on("updatePlayers", ( data ) => {
-    //     activePlayersServer = data
-    //     console.table(activePlayersServer)
-    //     io.emit("updatePlayers" , data)
-    // })
 })
 app.use(express.static("public"));
 app.use(express.static(path.join(__dirname, "public", "client")));

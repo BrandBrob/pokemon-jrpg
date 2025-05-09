@@ -1,6 +1,6 @@
 [
     [
-        "akira",
+        "Akira",
         {
             "abilities": [
                 {
@@ -14509,7 +14509,7 @@
         }
     ],
     [
-        "milotic",
+        "Romulo",
         {
             "abilities": [
                 {
@@ -14544,7 +14544,7 @@
             },
             "forms": [
                 {
-                    "name": "milotic",
+                    "name": "romulo",
                     "url": "https://pokeapi.co/api/v2/pokemon-form/350/"
                 }
             ],
@@ -24329,7 +24329,7 @@
                     ]
                 }
             ],
-            "name": "milotic",
+            "name": "Romulo",
             "order": 463,
             "past_abilities": [],
             "past_types": [],
@@ -29517,7 +29517,7 @@
         }
     ],
     [
-        "oreo",
+        "Oreo",
         {
             "abilities": [
                 {

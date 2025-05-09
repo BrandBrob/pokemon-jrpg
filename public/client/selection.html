@@ -187,32 +187,34 @@
                 <button class="pokemon-div__confirmChanges__btn dis" id="confirm-changes">Use this team</button>
             </div>
         </div>
-        <section class="continue-game">
-            <h4>You already have choosen some pokemons</h4>
-            <div class="continue-game_div">
-                <div class="continue-btn_div">
-                    <button class="continue-item" id="use-pokemons-btn">Use your saved Pokemons</button>
-                    <button class="continue-item" id="continue-btn">Continue the game</button>
+        <div class= "div-down">
+            <section class="continue-game">
+                <h4>You already have choosen some pokemons</h4>
+                <div class="continue-game_div">
+                    <div class="continue-btn_div">
+                        <button class="continue-item" id="use-pokemons-btn">Modify preset</button>
+                        <button class="continue-item" id="continue-btn">Play offline</button>
+                    </div>
+                    <div class="pokemons-div" id="saved-pokemon">
+                    </div>
                 </div>
-                <div class="pokemons-div" id="saved-pokemon">
-                </div>
-            </div>
-        </section>
-        <section class="presets-section">
-            <div class="presets_div">
-                <h2>Team presets</h2>
-                <div class="teampresets_div" id="teampresets">
-                    <div class="preset_div dis" id="team-preset-0">
-                    </div>
-                    <div class="preset_div dis" id="team-preset-1">
-                    </div>
-                    <div class="preset_div dis" id="team-preset-2">
-                    </div>
+            </section>
+            <section class="presets-section">
+                <div class="presets_div">
+                    <h2>Team presets</h2>
+                    <div class="teampresets_div" id="teampresets">
+                        <div class="preset_div dis" id="team-preset-0">
+                        </div>
+                        <div class="preset_div dis" id="team-preset-1">
+                        </div>
+                        <div class="preset_div dis" id="team-preset-2">
+                        </div>
                     
+                    </div>
                 </div>
-            </div>
 
-        </section>
+            </section>
+        </div>
         <footer class="main-footer">
             <h4 class="footer-item">Made by: <a href="https://github.com/BrandBrob"> Brandon</a></h4>
             <h4 class="footer-item">Check the repository of the project!</h4>
@@ -220,6 +222,7 @@
                 <h5 class="footer-item"><a href="https://github.com/BrandBrob/pokemon-jrpg">Project</a></h5>
                 <i class="fa-brands fa-github"></i>
             </div>
+        
         </footer>
         <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
         <script type="module" src="/code/main.js"></script>

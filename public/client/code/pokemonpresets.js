@@ -2,7 +2,7 @@ const presetsPokemons = [];
 let playerPokemons = [];
 const teamPresetsDiv = document.getElementById("teampresets");
 let catsSelected = false;
-const addPresetToDOM = (pokemon,num) => {
+const addPresetToDOM = async (pokemon,num) => {
     let teamPreset = document.getElementById(`team-preset-${num}`)
     if(teamPreset){
         teamPreset.classList.remove("dis")
@@ -10,10 +10,12 @@ const addPresetToDOM = (pokemon,num) => {
         else if(num ==1){teamPreset.innerHTML +="<h3>Cynthia Team</h3>"}
         else if(num == 2){teamPreset.innerHTML += "<h3>Papu team</h3>"; teamPreset.classList.add("team-cats");}
         teamPreset.innerHTML += `<button id= use-preset-btn-${num} class="special-cat-version">Use Preset</button>`
-        document.getElementById("use-preset-btn-2").addEventListener("click", () => {
+        if(document.getElementById("use-preset-btn-2")){
+        document.getElementById("use-preset-btn-2").addEventListener("click", async () => {
             catsSelected = true;
             console.log(catsSelected)
         })
+    }
     }
 
 
@@ -36,7 +38,7 @@ const addPresetToDOM = (pokemon,num) => {
                 playerPokemons = pokemon
                 const dataTeam = JSON.stringify(playerPokemons);
                 localStorage.setItem("pokemons",dataTeam)
-                history.pushState("null", "", "/game/jrpg") //Actualiza la ruta hacia el area de jrpg
+                // history.pushState("null", "", "/game/jrpg") //Actualiza la ruta hacia el area de jrpg
                 location.reload() //Refresca la pagina para que se vean los cambios
             });
         }
